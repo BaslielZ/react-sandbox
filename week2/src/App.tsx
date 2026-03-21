@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { DogGallery } from './pages/DogGallery';
+import { CatGallery } from './pages/CatGallery';
 
 // Home component (can be in the same file for this small example)
 function Home() {
-  return <div className="p-8 text-xl">Welcome to the Dog App!</div>;
+  return <div className="p-8 text-xl">Welcome to the Dog & Cat App!</div>;
 }
 
 export default function App() {
@@ -15,12 +16,14 @@ export default function App() {
       <nav className="p-4 bg-zinc-800 text-white flex gap-4">
         <Link to="/" className="hover:text-blue-300">Home</Link>
         <Link to="/dogs" className="hover:text-blue-300">Dog Gallery</Link>
+        <Link to="/cats" className="hover:text-blue-300">Cat Gallery</Link>
       </nav>
 
       {/* Routes - Defining which component is shown at which URL */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dogs" element={<DogGallery />} />
+        <Route path="/cats" element={<CatGallery/>}/>
       </Routes>
     </BrowserRouter>
   );
