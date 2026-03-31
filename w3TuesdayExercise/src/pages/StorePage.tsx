@@ -8,7 +8,7 @@ export function StorePage(){
     const fetchProducts = useProductStore((state) => state.fetchProducts)
     const isLoading = useProductStore((state) => state.isLoading)
 
-    const [filterType, setFilterType] = useState<'all' | 'fragrances' | 'furniture' | 'groceries' | 'beauty'>('all')
+    const [filterType, setFilterType] = useState<'all' | 'fragrances' | 'furniture' | 'groceries' | 'beauty' | 'laptops'>('all')
     const filteredProducts = filterType === 'all' ? products : products.filter(product => product.category === filterType)
 
     useEffect(() => {
@@ -21,11 +21,13 @@ export function StorePage(){
     return (
         <div className='p-2 flex flex-col justify-center items-center'>
             <h1 className='p-2 my-4 text-5xl'>Digital Store</h1>
-                <CategoryFilter categories={['all', 'fragrances', 'furniture', 'groceries', 'beauty']} selected={filterType} onSelect={(category) => setFilterType(category as 'all' | 'fragrances' | 'furniture' | 'groceries' | 'beauty')} />
+                <CategoryFilter categories={['all', 'fragrances', 'furniture', 'groceries', 'beauty', 'laptops']} selected={filterType} onSelect={(category) => setFilterType(category as 'all' | 'fragrances' | 'furniture' | 'groceries' | 'beauty')} />
             <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center mt-4">  
-            {filteredProducts.map(product => (
+            {filteredProducts.length == 0 ? 
+            (<p className='text-3xl mt-10'>No products found.</p> )
+            : (filteredProducts.map(product => (
                 <ProductCard key={product.id} product={product} />
-            ))}
+            )))}
             </div>
         </div>
     )
