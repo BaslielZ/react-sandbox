@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Modal from './components/Modal'
 
 // Fake data: Camping gear and their weights in grams
 const CAMPING_GEAR = [
@@ -10,6 +11,8 @@ const CAMPING_GEAR = [
 export default function App() {
   // 1. State for the Modal's visibility (open/closed)
   const [isOpen, setIsOpen] = useState(false);
+  const [showInfo, setShowInfo] = useState(false)
+  const [showOtherInfo, setShowOtherInfo] = useState(false)
 
   // 2. Reduce math: 
   // The function calculates the accumulating sum and the current item together. Initial value is 0.
@@ -57,6 +60,24 @@ export default function App() {
           </div>
         </div>
       )}
+
+
+      {/**ModalTest */}
+      <div className='mt-20'>
+        <h1 className='text-3xl my-5'>Modal Test</h1>
+
+        <button className='p-2 mr-4 bg-blue-500 text-white rounded hover:bg-blue-600' onClick={() => setShowInfo(true)}>Show details</button>
+        <Modal isOpen = {showInfo} onClose={() => setShowInfo(false)}>
+          <h2 className='text-2xl text-blue-600 font-bold mb-2'>Hello Earth</h2>
+          <p className='text-lg'>This is content injected inside the modal!</p>
+        </Modal>
+
+        <button className='p-2 mr-4 bg-red-600 text-white rounded hover:bg-red-500' onClick={() => setShowOtherInfo(true)}>Show other details</button>
+        <Modal isOpen = {showOtherInfo} onClose={() => setShowOtherInfo(false)}>
+          <h2 className='text-2xl text-red-600 font-bold mb-2'>Hello Mars</h2>
+          <p className='text-lg'>Mars is better than Earth</p>
+        </Modal>
+      </div>
 
     </div>
   );
