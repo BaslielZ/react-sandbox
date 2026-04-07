@@ -56,6 +56,9 @@ export interface ProductStoreState {
     products: Product[]
     fetchProducts: () => Promise<void>
     isLoading:boolean
+    cart: Product[]
+    addToCart: (product: Product) => void
+    clearCart: () => void
 }
 
 
@@ -72,5 +75,10 @@ export const useProductStore = create<ProductStoreState>((set) => ({
         } finally{
             set({isLoading: false})
         }
-    }
+    },
+    cart:[],
+    addToCart: (product: Product) => set ((state)=> (
+      { cart: [...state.cart, product]}
+    )),
+    clearCart: () => set ({ cart: [] })
 }))
