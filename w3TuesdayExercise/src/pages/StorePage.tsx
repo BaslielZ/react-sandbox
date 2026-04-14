@@ -7,6 +7,7 @@ import {Modal} from '../components/Modal'
 export function StorePage(){
     const products = useProductStore((state) => state.products)
     const cart = useProductStore((state) => state.cart)
+    const clearCart = useProductStore((state) => state.clearCart)
     const fetchProducts = useProductStore((state) => state.fetchProducts)
     const isLoading = useProductStore((state) => state.isLoading)
 
@@ -67,7 +68,11 @@ export function StorePage(){
                     <p className='font-bold text-xl'>€ {totalPrice.toFixed(2)}</p>
                 </div>
 
-                <button onClick={() => alert('Order successful!')} className='w-full p-2 mt-2 text-white font-bold bg-green-500'>Confirm Payment</button>
+                <button onClick={() => {alert('Order successful!')
+                    setIsOpen(false)
+                    clearCart()
+
+                }} className='w-full p-2 mt-2 text-white font-bold bg-green-500'>Confirm Payment</button>
             </Modal>
         </div>
     )
